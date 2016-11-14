@@ -7,6 +7,6 @@ const http = (apiMethod) => {
    }).catch(next)
 }
 
-export {
+module.exports = {
    http
 }
