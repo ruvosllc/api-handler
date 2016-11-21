@@ -1,12 +1,9 @@
 'use strict'
 
-const http = (apiMethod) => {
-   return (req, res, next) => apiMethod(req)
-   .then((apiResponse) => {
-      res.json(apiResponse || {})
-   }).catch(next)
-}
+const http = require('./lib/http')
+const logger = require('./lib/logger')
 
 module.exports = {
-   http
+  http,
+  logger,
 }

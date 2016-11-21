@@ -9,5 +9,8 @@
   "repository": {
     "type": "git",
     "url": "git@gitlab.ubermonitoring.com:paul.anderson/api-handler.git"
+  },
+  "dependencies": {
+    "morgan": "^1.7.0"
   }
 }
