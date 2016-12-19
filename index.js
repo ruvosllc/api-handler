@@ -2,8 +2,13 @@
 
 const http = require('./lib/http')
 const logger = require('./lib/logger')
+const error = require('./lib/error')
+const reject = require('./lib/reject')
 
-module.exports = {
+const apiHandler = {
   http,
   logger,
+  error,
 }
+
+module.exports = apiHandler
