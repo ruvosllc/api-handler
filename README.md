@@ -43,3 +43,34 @@ const app = require('express')()
 
 app.get('/hello', sayHelloMiddleware)
 ```
+
+## `apiHandler.reject(obj|status|message)`
+`reject` is a factory for creating useful promise rejections that are instances of Error.
+
+It accepts an object
+```js
+const missingRequiredName = apiHandler.reject({ status: 400, message: 'name is required' })
+```
+
+Or a numeric status
+```js
+const notFound = apiHandler.reject(404)
+```
+
+Or a message string
+```js
+const genericRejection = apiHandler.reject('there was a problem')
+```
+
+We can leverage `reject` in conjunction with `http` to do some nice rejection handling.
+```js
+const sayHelloInAPromise = (req) => {
+  if (!req.query.name) {
+    return apiHandler.reject({ status: 400, message: 'name is required' })
+  }
+  return Promise.resolve(`Hello ${req.query.name}`)
+}
+
+app.get('/hello', apiHandler.http(sayHelloInAPromise))
+```
+When the name query parameter is missing, we'll get a 400 HTTP response with our message while adhering to Promise rejection guidelines.
