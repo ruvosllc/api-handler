@@ -74,3 +74,19 @@ const sayHelloInAPromise = (req) => {
 app.get('/hello', apiHandler.http(sayHelloInAPromise))
 ```
 When the name query parameter is missing, we'll get a 400 HTTP response with our message while adhering to Promise rejection guidelines.
+
+
+## `apiHandler.logger(filename)`
+`logger` is a middleware for logging JSON-formatted request and response information.
+
+```js
+const logger = apiHandler.logger('logFile.log')
+app.get('/hello', logger, someOtherMiddleware)
+```
+
+someOtherMiddleware will be unaffected by the presence of the logger, but we'll get a new line in our logFile.log with JSON describing what occurred.
+
+The log filename is optional. If it is omitted, you'll get a warning message but things will just be written to process.stdout.
+```js
+const logToStdOut = apiHandler.logger()
+```
