@@ -19,7 +19,7 @@ const rejection = apiHandler.reject(404)
 const logger = apiHandler.logger('logFile.log')
 ```
 
-## `apiHandler.http(promiseyApiMethod)`
+## apiHandler.http(promiseyApiMethod)
 `http` turns a promisey API method into an Express middleware.
 
 Here's an example promisey API method that requires a query parameter called name in order to say hello. It rejects if there's no name provided and resolves otherwise with a template string.
@@ -44,7 +44,7 @@ const app = require('express')()
 app.get('/hello', sayHelloMiddleware)
 ```
 
-## `apiHandler.reject(obj|status|message)`
+## apiHandler.reject(obj|status|message)
 `reject` is a factory for creating useful promise rejections that are instances of Error.
 
 It accepts an object
@@ -76,7 +76,7 @@ app.get('/hello', apiHandler.http(sayHelloInAPromise))
 When the name query parameter is missing, we'll get a 400 HTTP response with our message while adhering to Promise rejection guidelines.
 
 
-## `apiHandler.logger(filename)`
+## apiHandler.logger(filename)
 `logger` is a middleware for logging JSON-formatted request and response information.
 
 ```js
