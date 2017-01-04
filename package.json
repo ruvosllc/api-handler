@@ -1,6 +1,6 @@
 {
   "name": "api-handler",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Generic api handling middleware.",
   "main": "index.js",
   "scripts": {
