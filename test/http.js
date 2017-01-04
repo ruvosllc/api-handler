@@ -24,12 +24,14 @@ describe('http', () => {
       should(typeof middleware).equal('function')
     })
     it('calls the apiMethod', () => {
-      middleware()
+      const res = { json: () => {} }
+      middleware(null, res)
       called.should.be.true()
     })
     it('passes the request object to the apiMethod', () => {
       const req = { data: 'stuff' }
-      middleware(req)
+      const res = { json: () => {} }
+      middleware(req, res)
       passedReq.should.equal(req)
     })
     it('writes the promise resolution to the response', (done) => {
