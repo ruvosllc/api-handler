@@ -36,15 +36,15 @@ describe('http', () => {
     })
     it('writes the promise resolution to the response', (done) => {
       const res = {
-          json: (data) => {
-            data.should.equal(called)
-            done()
-          }
+        json: (data) => {
+          data.should.equal(called)
+          done()
+        },
       }
       middleware({}, res, done)
     })
     it('passes promise rejection to next', (done) => {
-      const req = { fail: 'some error'}
+      const req = { fail: 'some error' }
       const next = (rejection) => {
         try {
           should(rejection).equal(req.fail)

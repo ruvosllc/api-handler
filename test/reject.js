@@ -2,7 +2,7 @@
 
 const reject = require('../lib/reject')
 const mocha = require('mocha')
-const should = require('should')
+require('should')
 
 const describe = mocha.describe
 const it = mocha.it

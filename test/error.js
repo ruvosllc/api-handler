@@ -2,7 +2,7 @@
 
 const error = require('../lib/error')
 const mocha = require('mocha')
-const should = require('should')
+require('should')
 
 const describe = mocha.describe
 const it = mocha.it
