@@ -4,7 +4,8 @@
   "description": "Generic api handling middleware.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint-config-uberops ."
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "mocha": "^3.2.0",
-    "should": "^11.1.2"
+    "should": "^11.1.2",
+    "eslint-config-uberops": "git+ssh://git@gitlab.ubermonitoring.com:modules/eslint-config-uberops.git#v0.0.5"
   }
 }
