@@ -1,22 +1,22 @@
 image: node:latest
 
-setup:
-  stage: build
-  script:
-    - source ci/setupSSH
-    - npm install
-
 lint:
   stage: test
   script:
+    - source ci/setupSSH
+    - npm install
     - npm run lint
 
 test:
   stage: test
   script:
+    - source ci/setupSSH
+    - npm install
     - npm test
 
 audit:
   stage: test
   script:
+    - source ci/setupSSH
+    - npm install
     - npm run audit
