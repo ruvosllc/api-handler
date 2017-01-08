@@ -3,5 +3,6 @@ image: node:latest
 job_test:
   stage: test
   script:
+    - source ci/setupSSH
     - npm install
     - npm test
