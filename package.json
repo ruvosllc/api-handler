@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint-config-uberops ."
+    "lint": "eslint-config-uberops .",
+    "audit": "nsp check"
   },
   "repository": {
     "type": "git",
@@ -16,8 +17,9 @@
     "morgan-json": "^1.1.0"
   },
   "devDependencies": {
+    "eslint-config-uberops": "git+ssh://git@gitlab.ubermonitoring.com:modules/eslint-config-uberops.git#v0.0.5",
     "mocha": "^3.2.0",
-    "should": "^11.1.2",
-    "eslint-config-uberops": "git+ssh://git@gitlab.ubermonitoring.com:modules/eslint-config-uberops.git#v0.0.5"
+    "nsp": "^2.6.2",
+    "should": "^11.1.2"
   }
 }
