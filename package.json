@@ -17,7 +17,7 @@
     "morgan-json": "^1.1.0"
   },
   "devDependencies": {
-    "eslint-config-uberops": "git+ssh://git@gitlab.ubermonitoring.com:modules/eslint-config-uberops.git#v0.0.5",
+    "eslint-config-uberops": "git+https://gitlab.ubermonitoring.com/modules/eslint-config-uberops.git#v0.0.5",
     "mocha": "^3.2.0",
     "nsp": "^2.6.2",
     "should": "^11.1.2"
