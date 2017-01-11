@@ -3,20 +3,17 @@ image: node:latest
 lint:
   stage: test
   script:
-    - source ci/setupSSH
     - npm install
     - npm run lint
 
 test:
   stage: test
   script:
-    - source ci/setupSSH
     - npm install
     - npm test
 
 audit:
   stage: test
   script:
-    - source ci/setupSSH
     - npm install
     - npm run audit
