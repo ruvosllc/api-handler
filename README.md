@@ -16,6 +16,7 @@ const apiHandler = require('api-handler')
 
 const middleware = apiHandler.http(promiseyApiMethod)
 const rejection = apiHandler.reject(404)
+const inputIsValid = apiHandler.validate('someInput', /expectedFormat/)
 const logger = apiHandler.logger('logFile.log')
 ```
 
@@ -75,6 +76,39 @@ app.get('/hello', apiHandler.http(sayHelloInAPromise))
 ```
 When the name query parameter is missing, we'll get a 400 HTTP response with our message while adhering to Promise rejection guidelines.
 
+## apiHandler.validate(actual, [expected|regex|validator])
+`validate` will check actual values against expected values, regular expressions, or validator functions.
+
+Without a second argument, it simply checks truthiness.
+```js
+apiHandler.validate('') // false
+apiHandler.validate('something') // true
+```
+
+With an expected value, strict equality is checked.
+```js
+apiHandler.validate(3, 3) // true
+apiHandler.validate(3, '3') // false
+apiHandler.validate('string', 'string') // true
+```
+
+Objects can be checked as well.
+```js
+apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'yep' } }) // true
+apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'nope' } }) // false
+```
+
+Regular expressions are sure handy.
+```js
+apiHandler.validate('something', /something/) // true
+apiHandler.validate('something', /nothing/) // false
+```
+
+If all else fails or you just need to get fancy, pass a validator function.
+```js
+apiHandler.validate('word', item => item.indexOf('p') > -1) // false
+apiHandler.validate('word up', item => item.indexOf('p') > -1) // true
+```
 
 ## apiHandler.logger(filename)
 `logger` is a middleware for logging JSON-formatted request and response information.

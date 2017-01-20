@@ -11,6 +11,7 @@ describe('validate returns booleans to describe validity', () => {
   it('which usually means they should not be undefined', () => {
     validate().should.be.false()
     validate(undefined).should.be.false()
+    validate('').should.be.false()
     validate('something').should.be.true()
   })
   it('and can check things for equality', () => {
