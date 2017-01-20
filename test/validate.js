@@ -39,4 +39,8 @@ describe('validate returns booleans to describe validity', () => {
     validate('b', item => item.indexOf('a') > -1).should.be.false()
     validate('ba', item => item.indexOf('a') > -1).should.be.true()
   })
+  it('and can test things using functions in objects', () => {
+    validate({ a: 'b' }, { a: item => item === 'c' }).should.be.false()
+    validate({ a: 'b' }, { a: item => item === 'b' }).should.be.true()
+  })
 })
