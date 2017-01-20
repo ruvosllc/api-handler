@@ -8,18 +8,18 @@ const describe = mocha.describe
 const it = mocha.it
 
 describe('http', () => {
-  let called
-  let passedReq
-  const apiMethod = (req) => {
-    passedReq = req
-    called = true
-    if (req && req.fail) {
-      return Promise.reject(req.fail)
-    }
-    return Promise.resolve(called)
-  }
-  const middleware = http(apiMethod)
   describe('returns a middleware that', () => {
+    let called
+    let passedReq
+    const apiMethod = (req) => {
+      passedReq = req
+      called = true
+      if (req && req.fail) {
+        return Promise.reject(req.fail)
+      }
+      return Promise.resolve(called)
+    }
+    const middleware = http(apiMethod)
     it('is a function', () => {
       should(typeof middleware).equal('function')
     })
@@ -55,6 +55,42 @@ describe('http', () => {
         }
       }
       middleware(req, {}, next)
+    })
+  })
+  describe('handles thrown exceptions', () => {
+    const apiMethod = (req) => {
+      if (req && req.fail) {
+        throw req.fail
+      }
+      return Promise.resolve(req.success)
+    }
+    const middleware = http(apiMethod)
+    it('by passing to next when no status is found', (done) => {
+      const req = { fail: 'some error' }
+      const next = (rejection) => {
+        try {
+          should(rejection).equal(req.fail)
+          done()
+        } catch (err) {
+          done(err)
+          throw err
+        }
+      }
+      middleware(req, {}, next)
+    })
+    it('by writing to the response when there is a status', (done) => {
+      const req = {
+        fail: {
+          status: 400,
+        },
+      }
+      const res = {
+        status: (status) => {
+          status.should.equal(req.fail.status)
+          done()
+        },
+      }
+      middleware(req, res, done)
     })
   })
 })
