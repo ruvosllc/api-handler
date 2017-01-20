@@ -17,6 +17,7 @@ describe('validate returns booleans to describe validity', () => {
   it('and can check things for equality', () => {
     validate(null, null).should.be.true()
     validate(null, 'anything').should.be.false()
+    validate('something', null).should.be.false()
     validate('something', 'nothing').should.be.false()
     validate('something', 'something').should.be.true()
     validate(12, 10).should.be.false()
