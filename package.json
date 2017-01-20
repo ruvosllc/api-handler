@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint-config-uberops .",
+    "lint": "eslint .",
     "audit": "nsp check"
   },
   "repository": {
