@@ -16,8 +16,9 @@ const apiHandler = require('api-handler')
 
 const middleware = apiHandler.http(promiseyApiMethod)
 const rejection = apiHandler.reject(404)
-const inputIsValid = apiHandler.validate('someInput', /expectedFormat/)
 const logger = apiHandler.logger('logFile.log')
+const inputIsValid = apiHandler.validate('someInput', /expectedFormat/)
+apiHandler.require('someInput', /expectedFormat/)
 ```
 
 ## apiHandler.http(promiseyApiMethod)
@@ -92,10 +93,17 @@ apiHandler.validate(3, '3') // false
 apiHandler.validate('string', 'string') // true
 ```
 
+Types can be checked.
+```js
+apiHandler.validate(100, String) // false
+apiHandler.validate(100, Number) // true
+```
+
 Objects can be checked as well.
 ```js
 apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'yep' } }) // true
 apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'nope' } }) // false
+apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: String } }) // true
 ```
 
 Regular expressions are sure handy.
