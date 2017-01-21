@@ -136,6 +136,28 @@ const schema = {
 apiHandler.validate(data, schema) // true
 ```
 
+## apiHandler.require(actual, expected, message)
+`require` wraps validate and throws 400 errors when things are invalid.
+```js
+apiHandler.require(100, String, 'should be a string')
+```
+
+When a message is not provided, a simple one will be generated.
+```js
+// Throws an error with message 'thing is invalid'
+apiHandler.require({ thing: 'something' }, { thing: 'somethingElse' })
+```
+
+This works well for request validation.
+```js
+const apiMethod = (req) => {
+  apiHandler.require(req.body, {
+    aString: String,
+    anArray: Array,
+  })
+}
+```
+
 ## apiHandler.logger(filename)
 `logger` is a middleware for logging JSON-formatted request and response information.
 
