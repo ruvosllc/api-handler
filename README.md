@@ -78,7 +78,7 @@ app.get('/hello', apiHandler.http(sayHelloInAPromise))
 When the name query parameter is missing, we'll get a 400 HTTP response with our message while adhering to Promise rejection guidelines.
 
 ## apiHandler.validate(actual, [expected|regex|validator])
-`validate` will check actual values against expected values, regular expressions, or validator functions.
+`validate` will check actual values against expected values, types, regular expressions, or validator functions.
 
 Without a second argument, it simply checks truthiness.
 ```js
@@ -99,23 +99,41 @@ apiHandler.validate(100, String) // false
 apiHandler.validate(100, Number) // true
 ```
 
-Objects can be checked as well.
-```js
-apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'yep' } }) // true
-apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'nope' } }) // false
-apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: String } }) // true
-```
-
 Regular expressions are sure handy.
 ```js
 apiHandler.validate('something', /something/) // true
 apiHandler.validate('something', /nothing/) // false
 ```
 
-If all else fails or you just need to get fancy, pass a validator function.
+If you need to get fancy, pass a validator function.
 ```js
 apiHandler.validate('word', item => item.indexOf('p') > -1) // false
 apiHandler.validate('word up', item => item.indexOf('p') > -1) // true
+```
+
+Objects can be checked as well.
+```js
+apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'yep' } }) // true
+apiHandler.validate({ stuff: { things: 'yep' } }, { stuff: { things: 'nope' } }) // false
+```
+
+Mix and match to create a schema.
+```js
+const data = {
+  aNumber: 100,
+  aString: 'something',
+  nest: {
+    anArray: [1, '1']
+  }
+}
+const schema = {
+  aNumber: Number,
+  aString: /something/,
+  nest: {
+    anArray: [Number, String]
+  }
+}
+apiHandler.validate(data, schema) // true
 ```
 
 ## apiHandler.logger(filename)
