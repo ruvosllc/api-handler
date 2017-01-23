@@ -29,6 +29,8 @@ describe('require validates things by throwing 400s', () => {
   it('when the actual value does not pass the provided validator', () => {
     requ.bind(null, 'thing', () => false).should.throw({ status: 400 })
     requ.bind(null, 'thing', () => true).should.not.throw()
+    requ.bind(null, { a: 'b' }, item => item.a === 'a').should.throw({ status: 400 })
+    requ.bind(null, { a: 'a' }, item => item.a === 'a').should.not.throw()
   })
   it('and will handle accept messages', () => {
     requ.bind(null, false, true, 'a message').should.throw({ status: 400, message: 'a message' })
