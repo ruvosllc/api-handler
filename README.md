@@ -139,23 +139,29 @@ apiHandler.validate(data, schema) // true
 ## apiHandler.require(actual, expected, message)
 `require` wraps validate and throws 400 errors when things are invalid.
 ```js
+// Throws an Error with { message: 'should be a string', status: 400 }
 apiHandler.require(100, String, 'should be a string')
 ```
 
-When a message is not provided, a simple one will be generated.
+When a message is not provided, a simple one will be generated when a key is available.
 ```js
-// Throws an error with message 'thing is invalid'
+// Throws an Error with { message: 'thing is invalid', status: 400 }
 apiHandler.require({ thing: 'something' }, { thing: 'somethingElse' })
+
+// Throws an Error with { status: 400 }
+apiHandler.require('something', 'somethingElse')
 ```
 
-This works well for request validation.
+This works well for request validation when used in conjunction with `http`.
 ```js
-const apiMethod = (req) => {
-  apiHandler.require(req.body, {
-    aString: String,
-    anArray: Array,
-  })
+const app = require('express')()
+
+const sayHelloInAPromise = (req) => {
+  apiHandler.require(req.query, { name: String })
+  return Promise.resolve(`Hello ${req.query.name}`)
 }
+
+app.get('/hello', apiHandler.http(sayHelloInAPromise))
 ```
 
 ## apiHandler.logger(filename)
