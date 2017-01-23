@@ -38,4 +38,8 @@ describe('require validates things by throwing 400s', () => {
     requ.bind(null, { body: { thing: 'thing' } }, { body: { thing: 'notThing' } })
     .should.throw({ status: 400, message: 'body.thing is invalid' })
   })
+  it('and will not generate error messages for non-object validations', () => {
+    requ.bind(null, 'thing', 'notThing')
+    .should.throw({ status: 400, message: undefined })
+  })
 })
