@@ -7,6 +7,7 @@ const reject = require('./lib/reject')
 const statuses = require('./lib/statuses')
 const validate = require('./lib/validate')
 const requ = require('./lib/require')
+const accept = require('./lib/accept')
 
 const apiHandler = {
   http,
@@ -15,6 +16,7 @@ const apiHandler = {
   reject,
   validate,
   require: requ,
+  accept,
 }
 
 Object.assign(apiHandler, statuses)
