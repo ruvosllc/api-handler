@@ -46,6 +46,9 @@ describe('validate returns booleans to describe validity', () => {
     validate({ a: 'b' }, Object).should.be.true()
     validate({ a: 'b' }, { a: String }).should.be.true()
     validate({ a: 'b' }, { a: Boolean }).should.be.false()
+    validate([], Object).should.be.true()
+    validate([], Array).should.be.true()
+    validate([], String).should.be.false()
   })
   it('and can test things using a function', () => {
     validate(null, item => item === null).should.be.true()
