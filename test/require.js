@@ -47,5 +47,6 @@ describe('require validates things by throwing 400s', () => {
   it('but respects that sometimes things are optional', () => {
     requ.bind(null, undefined, 'thing', 'a message').should.throw({ status: 400 })
     requ.bind(null, undefined, 'thing', 'a message', true).should.not.throw({ status: 400 })
+    requ.bind(null, 'notThing', 'thing', 'a message', true).should.throw({ status: 400 })
   })
 })

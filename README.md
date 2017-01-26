@@ -136,7 +136,7 @@ const schema = {
 apiHandler.validate(data, schema) // true
 ```
 
-## apiHandler.require(actual, expected, message)
+## apiHandler.require(actual, expected, message, optional)
 `require` wraps validate and throws 400 errors when things are invalid.
 ```js
 // Throws an Error with { message: 'should be a string', status: 400 }
@@ -152,6 +152,15 @@ apiHandler.require({ thing: 'something' }, { thing: 'somethingElse' })
 apiHandler.require('something', 'somethingElse')
 ```
 
+To skip missing parameters, set `optional` to true.
+```js
+// Doesn't throw an Error
+apiHandler.require({}, { thing: 'somethingElse' }, null, true)
+
+// Throws an Error
+apiHandler.require({}, { thing: 'somethingElse' })
+```
+
 This works well for request validation when used in conjunction with `http`.
 ```js
 const app = require('express')()
@@ -162,6 +171,16 @@ const sayHelloInAPromise = (req) => {
 }
 
 app.get('/hello', apiHandler.http(sayHelloInAPromise))
+```
+
+## apiHandler.accept(actual, expected, message)
+`accept` is shorthand for `require` with the `optional` flag set to `true`.
+```js
+// Using `accept` like this
+apiHandler.accept('actual', 'expected')
+
+// Is the same thing as
+apiHandler.require('actual', 'expected', null, true)
 ```
 
 ## apiHandler.logger(filename)
