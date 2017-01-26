@@ -8,7 +8,7 @@ const describe = mocha.describe
 const it = mocha.it
 
 describe('require validates things by throwing 400s', () => {
-  it('when nothing is provided', () => {
+  describe('when nothing is provided', () => {
     requ.should.throw({ status: 400 })
     requ.bind(null, true).should.not.throw()
   })
@@ -43,5 +43,9 @@ describe('require validates things by throwing 400s', () => {
   it('and will not generate error messages for non-object validations', () => {
     requ.bind(null, 'thing', 'notThing')
     .should.throw({ status: 400, message: undefined })
+  })
+  it('but respects that sometimes things are optional', () => {
+    requ.bind(null, undefined, 'thing', 'a message').should.throw({ status: 400 })
+    requ.bind(null, undefined, 'thing', 'a message', true).should.not.throw({ status: 400 })
   })
 })
