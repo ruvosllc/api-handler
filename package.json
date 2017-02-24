@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git@gitlab.ubermonitoring.com:paul.anderson/api-handler.git"
   },
+  "publishConfig": {
+    "registry": "http://nexus3.default.dev.uberops.net/repository/npm-internal/"
+  },
   "dependencies": {
     "morgan": "^1.7.0",
     "morgan-json": "^1.1.0"
