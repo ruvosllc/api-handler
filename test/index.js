@@ -29,4 +29,7 @@ describe('API Handler', () => {
   it('exports accept', () => {
     apiHandler.accept.should.be.a.Function()
   })
+  it('exports resolve', () => {
+    apiHandler.resolve.should.be.a.Function()
+  })
 })
