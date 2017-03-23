@@ -15,7 +15,8 @@ $ npm install --save git+ssh://git@gitlab.ubermonitoring.com:modules/api-handler
 const apiHandler = require('api-handler')
 
 const middleware = apiHandler.http(promiseyApiMethod)
-const rejection = apiHandler.reject(404)
+const rejection = apiHandler.reject(404) || apiHandler[404]()
+const resolution = apiHandler.resolve(201) || apiHandler[201]()
 const logger = apiHandler.logger('logFile.log')
 const inputIsValid = apiHandler.validate('someInput', /expectedFormat/)
 apiHandler.require('someInput', /expectedFormat/)
@@ -76,6 +77,19 @@ const sayHelloInAPromise = (req) => {
 app.get('/hello', apiHandler.http(sayHelloInAPromise))
 ```
 When the name query parameter is missing, we'll get a 400 HTTP response with our message while adhering to Promise rejection guidelines.
+
+## apiHandler.resolve(status|any)
+`resolve` is a factory for creating promise resolutions. Its use is not required but it offers some convenience.
+
+It accepts a numeric status
+```js
+const created = apiHandler.resolve(201)
+```
+
+And anything else will just be passed along to `Promise.resolve()`
+```js
+const someStuff = apiHandler.resolve({ some: 'stuff' })
+```
 
 ## apiHandler.validate(actual, [expected|regex|validator])
 `validate` will check actual values against expected values, types, regular expressions, or validator functions.
