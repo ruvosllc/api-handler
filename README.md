@@ -47,6 +47,36 @@ const app = require('express')()
 app.get('/hello', sayHelloMiddleware)
 ```
 
+If you resolve or reject with an object having a numeric `status` property, that status will be set as the HTTP response status.
+```js
+const sayHelloInAPromise = (req) => {
+  if (!req.query.name) {
+    return Promise.reject({ status: 400 })
+  }
+  return Promise.resolve({ status: 200})
+}
+```
+
+When rejecting, a `message` may be included to respond with an error message.
+```js
+const sayHelloInAPromise = (req) => {
+  if (!req.query.name) {
+    return Promise.reject({ status: 400, message: 'name is required' })
+  }
+  return Promise.resolve({ status: 200})
+}
+```
+
+And when resolving, a `data` property may be included to respond with some data.
+```js
+const sayHelloInAPromise = (req) => {
+  if (!req.query.name) {
+    return Promise.reject({ status: 400, message: 'name is required' })
+  }
+  return Promise.resolve({ status: 200, data: `Hello ${req.query.name}`})
+}
+```
+
 ## apiHandler.reject(obj|status|message)
 `reject` is a factory for creating useful promise rejections that are instances of Error.
 
