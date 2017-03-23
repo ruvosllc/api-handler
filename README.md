@@ -121,6 +121,29 @@ And anything else will just be passed along to `Promise.resolve()`
 const someStuff = apiHandler.resolve({ some: 'stuff' })
 ```
 
+## apiHandler\[status\](message|data)
+For every HTTP status code included in node's built in http library, there is a corresponding method on apiHandler that acts as a `resolve()` or `reject()` depending on the status.
+
+For example, rejecting with a 404 can be accomplished like this
+```js
+const notFound = apiHandler[404]()
+```
+
+And an error message may be provided
+```js
+const badRequest = apiHandler[400]('missing input')
+```
+
+Similarly, resolving with a 201 can be accomplished like this
+```js
+const created = apiHandler[201]()
+```
+
+And result data may be provided
+```js
+const createdWithData = apiHandler[201]({ some: 'thing' })
+```
+
 ## apiHandler.validate(actual, [expected|regex|validator])
 `validate` will check actual values against expected values, types, regular expressions, or validator functions.
 
