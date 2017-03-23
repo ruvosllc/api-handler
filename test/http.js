@@ -93,4 +93,37 @@ describe('http', () => {
       middleware(req, res, done)
     })
   })
+  describe('handles http statuses', () => {
+    it('by writing to the response when there is a status', (done) => {
+      let resStatus
+      const res = {
+        status: (status) => {
+          resStatus = status
+        },
+        json: (obj) => {
+          should(resStatus).equal(201)
+          should(obj).not.have.property('status')
+          done()
+        },
+      }
+      http(() => Promise.resolve({ status: 201 }))({}, res, done)
+    })
+    it('by writing to the response when there is a status and data', (done) => {
+      let resStatus
+      const data = {
+        some: 'data',
+      }
+      const res = {
+        status: (status) => {
+          resStatus = status
+        },
+        json: (obj) => {
+          should(resStatus).equal(201)
+          should(obj).deepEqual(data)
+          done()
+        },
+      }
+      http(() => Promise.resolve({ status: 201, data }))({}, res, done)
+    })
+  })
 })
