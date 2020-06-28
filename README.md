@@ -1,7 +1,6 @@
 # api-handler
 
 ## Installation
-Install via npm using your protocol of choice pointing to this repository. Here's an example of installing the latest version using SSH:
 ```
 $ npm install @pandapaul/api-handler
 ```
