@@ -3,11 +3,7 @@
 ## Installation
 Install via npm using your protocol of choice pointing to this repository. Here's an example of installing the latest version using SSH:
 ```
-$ npm install --save git+ssh://git@gitlab.ubermonitoring.com:modules/api-handler.git
-```
-To install a specific version, a git tag may be added.
-```
-$ npm install --save git+ssh://git@gitlab.ubermonitoring.com:modules/api-handler.git#v0.0.0
+$ npm install @pandapaul/api-handler
 ```
 
 ## Usage Overview
