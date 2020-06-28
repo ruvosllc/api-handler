@@ -1,5 +1,5 @@
 {
-  "name": "api-handler",
+  "name": "@pandapaul/api-handler",
   "version": "0.11.0",
   "description": "Generic api handling middleware.",
   "main": "index.js",
@@ -10,19 +10,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.ubermonitoring.com:paul.anderson/api-handler.git"
-  },
-  "publishConfig": {
-    "registry": "https://nexus.ubermonitoring.com/repository/npm-hosted/"
+    "url": "git@github.com:ruvosllc/api-handler.git"
   },
   "dependencies": {
     "morgan": "^1.7.0",
     "morgan-json": "^1.1.0"
   },
   "devDependencies": {
-    "eslint-config-uberops": "git+https://gitlab.ubermonitoring.com/modules/eslint-config-uberops.git#v0.0.5",
     "mocha": "^3.2.0",
     "nsp": "^2.6.2",
-    "should": "^11.1.2"
-  }
+    "should": "^11.1.2",
+    "standard": "^14.3.4"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "author": "paul@ruvos.com",
+  "license": "MIT"
 }
