@@ -18,7 +18,7 @@ const apiHandler = {
   validate,
   require: requ,
   accept,
-  resolve,
+  resolve
 }
 
 Object.assign(apiHandler, statuses)

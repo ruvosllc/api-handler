@@ -39,7 +39,7 @@ describe('http', () => {
         json: (data) => {
           data.should.equal(called)
           done()
-        },
+        }
       }
       middleware({}, res, done)
     })
@@ -81,14 +81,14 @@ describe('http', () => {
     it('by writing to the response when there is a status', (done) => {
       const req = {
         fail: {
-          status: 400,
-        },
+          status: 400
+        }
       }
       const res = {
         status: (status) => {
           status.should.equal(req.fail.status)
           done()
-        },
+        }
       }
       middleware(req, res, done)
     })
@@ -104,14 +104,14 @@ describe('http', () => {
           should(resStatus).equal(201)
           should(obj).not.have.property('status')
           done()
-        },
+        }
       }
       http(() => Promise.resolve({ status: 201 }))({}, res, done)
     })
     it('by writing to the response when there is a status and data', (done) => {
       let resStatus
       const data = {
-        some: 'data',
+        some: 'data'
       }
       const res = {
         status: (status) => {
@@ -121,7 +121,7 @@ describe('http', () => {
           should(resStatus).equal(201)
           should(obj).deepEqual(data)
           done()
-        },
+        }
       }
       http(() => Promise.resolve({ status: 201, data }))({}, res, done)
     })

@@ -22,9 +22,9 @@ describe('accept validates things that exist by throwing 400s', () => {
   })
   it('when the actual object does not contain the expected values', () => {
     accept.bind(null, { body: { thing: 'thing' } }, { body: { thing: 'notThing' } })
-    .should.throw({ status: 400 })
+      .should.throw({ status: 400 })
     accept.bind(null, { body: {} }, { body: { thing: 'thing' } })
-    .should.not.throw()
+      .should.not.throw()
   })
   it('when the actual value does not pass the provided validator', () => {
     accept.bind(null, 'thing', () => false).should.throw({ status: 400 })
@@ -40,10 +40,10 @@ describe('accept validates things that exist by throwing 400s', () => {
   })
   it('and will generate error messages for object validations', () => {
     accept.bind(null, { body: { thing: 'thing' } }, { body: { thing: 'notThing' } })
-    .should.throw({ status: 400, message: 'body.thing is invalid' })
+      .should.throw({ status: 400, message: 'body.thing is invalid' })
   })
   it('and will not generate error messages for non-object validations', () => {
     accept.bind(null, 'thing', 'notThing')
-    .should.throw({ status: 400, message: undefined })
+      .should.throw({ status: 400, message: undefined })
   })
 })

@@ -22,9 +22,9 @@ describe('require validates things by throwing 400s', () => {
   })
   it('when the actual object does not contain the expected values', () => {
     requ.bind(null, { body: { thing: 'thing' } }, { body: { thing: 'notThing' } })
-    .should.throw({ status: 400 })
+      .should.throw({ status: 400 })
     requ.bind(null, { body: { thing: 'thing' } }, { body: { thing: 'thing' } })
-    .should.not.throw()
+      .should.not.throw()
   })
   it('when the actual value does not pass the provided validator', () => {
     requ.bind(null, 'thing', () => false).should.throw({ status: 400 })
@@ -38,11 +38,11 @@ describe('require validates things by throwing 400s', () => {
   })
   it('and will generate error messages for object validations', () => {
     requ.bind(null, { body: { thing: 'thing' } }, { body: { thing: 'notThing' } })
-    .should.throw({ status: 400, message: 'body.thing is invalid' })
+      .should.throw({ status: 400, message: 'body.thing is invalid' })
   })
   it('and will not generate error messages for non-object validations', () => {
     requ.bind(null, 'thing', 'notThing')
-    .should.throw({ status: 400, message: undefined })
+      .should.throw({ status: 400, message: undefined })
   })
   it('but respects that sometimes things are optional', () => {
     requ.bind(null, undefined, 'thing', 'a message').should.throw({ status: 400 })
